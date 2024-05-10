@@ -1,28 +1,26 @@
-function reorderList(head) {
-  if (!head || !head.next) return;
-  let slow = head;
-  let fast = head;
-  while (fast.next && fast.next.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-  let prev = null;
-  let curr = slow.next;
-  slow.next = null;
-  while (curr) {
-    const next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
-  }
-  let first = head;
-  let second = prev;
-  while (second.next) {
-    const next = first.next;
-    first.next = second;
-    first = next;
-    const next2 = second.next;
-    second.next = first;
-    second = next2;
+function letterCombinations(digits) {
+  if (digits.length === 0) return [];
+  const map = {
+    2: "abc",
+    3: "def",
+    4: "ghi",
+    5: "jkl",
+    6: "mno",
+    7: "pqrs",
+    8: "tuv",
+    9: "wxyz",
+  };
+  const result = [];
+  backtrack("", 0);
+  return result;
+  function backtrack(current, index) {
+    if (current.length === digits.length) {
+      result.push(current);
+      return;
+    }
+    const letters = map[digits[index]];
+    for (const letter of letters) {
+      backtrack(current + letter, index + 1);
+    }
   }
 }
